@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="/Users/ljm/Desktop/work/projectPackage/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar"/>
+
+    <context id="sell.dao" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://115.159.39.128:3309/xdb??autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"-->
+                        <!--userId="root"-->
+                        <!--password="d29fce965d" />-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/sell??autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"
+                        userId="root"
+                        password="123456789" />
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.seller.dao.model"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+
+       <sqlMapGenerator targetPackage="com.seller.dao.conf"
+                         targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.seller.dao"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+            <property name="methodNameCalculator" value="extended" />
+        </javaClientGenerator>
+
+        <!--<table tableName="order_detail" domainObjectName="OrderDetail"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+            <!--<ignoreColumn column="update_at"/>-->
+            <!--<ignoreColumn column="create_at"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="order_master" domainObjectName="OrderMaster"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+            <!--<ignoreColumn column="update_at"/>-->
+            <!--<ignoreColumn column="create_at"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="product_info" domainObjectName="ProductInfo"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+            <!--<ignoreColumn column="update_at"/>-->
+            <!--<ignoreColumn column="create_at"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="product_category" domainObjectName="ProductCategory"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+            <!--<ignoreColumn column="update_at"/>-->
+            <!--<ignoreColumn column="create_at"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="seller_info" domainObjectName="SellerInfo"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+            <!--<ignoreColumn column="update_at"/>-->
+            <!--<ignoreColumn column="create_at"/>-->
+        <!--</table>-->
+
+    </context>
+</generatorConfiguration>
