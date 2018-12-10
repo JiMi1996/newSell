@@ -36,8 +36,6 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/seller")
 public class SellerController {
 
-    private final static String openid = "110110";
-
     @Autowired
     private SellerInfoService sellerInfoService;
 
@@ -52,7 +50,7 @@ public class SellerController {
         SellerInfo sellerInfo = sellerInfoService.findByOpenid(openid);
         if(sellerInfo == null || !sellerInfo.getPassword().equals(password)){
             map.put("msg",ExceptionEnum.LOGIN_FAIL.getMessage());
-            map.put("url","/seller/order/list");
+            map.put("url","/seller/login");
             return new ModelAndView("/common/error",map);
         }
         //设置token到redis
@@ -63,7 +61,12 @@ public class SellerController {
         //设置cookie
         CookieUtil.set(response,CookieConstant.TOKEN,token,CookieConstant.EXPIRE);
 
-        return new ModelAndView("redirect:/seller/order/list");
+        return new ModelAndView("redirect:/seller/index");
+    }
+
+    @GetMapping("index")
+    public ModelAndView index(){
+        return new ModelAndView("index");
     }
 
     @ApiOperation("【后台管理】商家登出")
@@ -83,9 +86,5 @@ public class SellerController {
         return new ModelAndView("common/success",map);
     }
 
-    @ApiOperation("【后台管理】商家首页")
-    @GetMapping("index")
-    public ModelAndView index(){
-        return new ModelAndView("index");
-    }
+
 }
