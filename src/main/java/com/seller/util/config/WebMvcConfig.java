@@ -64,18 +64,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                         "/"
                 );
 
-
-//        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
-//
-//        // 排除配置
-//        addInterceptor.excludePathPatterns("/error");
-//        addInterceptor.excludePathPatterns("/");
-//        addInterceptor.excludePathPatterns("/img/**");
-//        addInterceptor.excludePathPatterns("/index");
-//
-////         拦截配置
-//        addInterceptor.addPathPatterns("/**");
-
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {

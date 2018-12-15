@@ -5,6 +5,8 @@ package com.seller.controller;/**
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -16,9 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @ApiOperation("【后台管理】商家首页")
+//    @ApiOperation("【后台管理】商家首页")
+//    @GetMapping("/index")
+//    public ModelAndView loginPage(){
+//        return new ModelAndView("login");
+//    }
+
+
     @GetMapping("/index")
-    public ModelAndView loginPage(){
-        return new ModelAndView("login");
+    @ResponseBody
+    public String loginPage(){
+        return "success";
     }
 }

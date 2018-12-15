@@ -1,6 +1,7 @@
 package com.seller.controller;
 
 import com.seller.dao.model.SellerInfo;
+import com.seller.dto.LoginDto;
 import com.seller.exception.SellException;
 import com.seller.service.SellerInfoService;
 import com.seller.util.constant.CookieConstant;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -42,32 +40,55 @@ public class SellerController {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+//    @ApiOperation("【后台管理】商家登录")
+//    @PostMapping("/login")
+//    public ModelAndView select(@RequestParam("openid") String openid,
+//                               @RequestParam("password") String password,
+//                               HttpServletResponse response, Map<String, Object> map){
+//        SellerInfo sellerInfo = sellerInfoService.findByOpenid(openid);
+//        if(sellerInfo == null || !sellerInfo.getPassword().equals(password)){
+//            map.put("msg",ExceptionEnum.LOGIN_FAIL.getMessage());
+//            map.put("url","/seller/login");
+//            return new ModelAndView("/common/error",map);
+//        }
+//        //设置token到redis
+//        String token = UUID.randomUUID().toString();
+//        Integer expire = RedisConstant.EXPIRE;
+//        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),openid,expire,TimeUnit.SECONDS);
+//
+//        //设置cookie
+//        CookieUtil.set(response,CookieConstant.TOKEN,token,CookieConstant.EXPIRE);
+//
+//        return new ModelAndView("redirect:/seller/index");
+//    }
+
     @ApiOperation("【后台管理】商家登录")
     @PostMapping("/login")
-    public ModelAndView select(@RequestParam("openid") String openid,
-                               @RequestParam("password") String password,
+    @ResponseBody
+    public String select(@RequestBody LoginDto loginDto,
                                HttpServletResponse response, Map<String, Object> map){
-        SellerInfo sellerInfo = sellerInfoService.findByOpenid(openid);
-        if(sellerInfo == null || !sellerInfo.getPassword().equals(password)){
-            map.put("msg",ExceptionEnum.LOGIN_FAIL.getMessage());
-            map.put("url","/seller/login");
-            return new ModelAndView("/common/error",map);
-        }
-        //设置token到redis
-        String token = UUID.randomUUID().toString();
-        Integer expire = RedisConstant.EXPIRE;
-        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),openid,expire,TimeUnit.SECONDS);
+//        SellerInfo sellerInfo = sellerInfoService.findByOpenid(openid);
+//        if(sellerInfo == null || !sellerInfo.getPassword().equals(password)){
+//            map.put("msg",ExceptionEnum.LOGIN_FAIL.getMessage());
+//            map.put("url","/seller/login");
+//            return "失败";
+//        }
+//        //设置token到redis
+//        String token = UUID.randomUUID().toString();
+//        Integer expire = RedisConstant.EXPIRE;
+//        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),openid,expire,TimeUnit.SECONDS);
+//
+//        //设置cookie
+//        CookieUtil.set(response,CookieConstant.TOKEN,token,CookieConstant.EXPIRE);
 
-        //设置cookie
-        CookieUtil.set(response,CookieConstant.TOKEN,token,CookieConstant.EXPIRE);
-
-        return new ModelAndView("redirect:/seller/index");
+        return "success";
     }
 
-    @GetMapping("index")
-    public ModelAndView index(){
-        return new ModelAndView("index");
-    }
+
+//    @GetMapping("index")
+//    public ModelAndView index(){
+//        return new ModelAndView("index");
+//    }
 
     @ApiOperation("【后台管理】商家登出")
     @GetMapping("logout")
@@ -84,6 +105,12 @@ public class SellerController {
         map.put("msg",ExceptionEnum.LOGOUT_SUCCESS.getMessage());
         map.put("url","/seller/order/list");
         return new ModelAndView("common/success",map);
+    }
+
+    @GetMapping("/index")
+    @ResponseBody
+    public String loginPage(){
+        return "success";
     }
 
 
