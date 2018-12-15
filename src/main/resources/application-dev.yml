@@ -13,7 +13,7 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/sell?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: 12345678
+    password: 123456789
         # 使用druid数据源
 #        type: com.alibaba.druid.pool.DruidDataSource
 #        filters: stat

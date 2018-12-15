@@ -4,6 +4,7 @@ import com.seller.dao.model.SellerInfo;
 import com.seller.dto.LoginDto;
 import com.seller.exception.SellException;
 import com.seller.service.SellerInfoService;
+import com.seller.util.VO.Result;
 import com.seller.util.constant.CookieConstant;
 import com.seller.util.constant.RedisConstant;
 import com.seller.util.cookie.CookieUtil;
@@ -65,30 +66,14 @@ public class SellerController {
     @ApiOperation("【后台管理】商家登录")
     @PostMapping("/login")
     @ResponseBody
-    public String select(@RequestBody LoginDto loginDto,
+    public Result select(@RequestParam("openid") String openid,
+                         @RequestParam("password") String password,
                                HttpServletResponse response, Map<String, Object> map){
-//        SellerInfo sellerInfo = sellerInfoService.findByOpenid(openid);
-//        if(sellerInfo == null || !sellerInfo.getPassword().equals(password)){
-//            map.put("msg",ExceptionEnum.LOGIN_FAIL.getMessage());
-//            map.put("url","/seller/login");
-//            return "失败";
-//        }
-//        //设置token到redis
-//        String token = UUID.randomUUID().toString();
-//        Integer expire = RedisConstant.EXPIRE;
-//        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),openid,expire,TimeUnit.SECONDS);
-//
-//        //设置cookie
-//        CookieUtil.set(response,CookieConstant.TOKEN,token,CookieConstant.EXPIRE);
+        Result result = sellerInfoService.login(openid,password,response);
 
-        return "success";
+        return result;
     }
 
-
-//    @GetMapping("index")
-//    public ModelAndView index(){
-//        return new ModelAndView("index");
-//    }
 
     @ApiOperation("【后台管理】商家登出")
     @GetMapping("logout")
@@ -112,6 +97,4 @@ public class SellerController {
     public String loginPage(){
         return "success";
     }
-
-
 }
